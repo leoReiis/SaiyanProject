@@ -1,8 +1,8 @@
 <template>
   <v-container
-    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16"
+    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <h1>TrainSys Login</h1>
+    <h1>Saiya Gym Login</h1>
     <v-form
       @submit.prevent="handleSubmit"
       class="d-flex flex-column justify-center mt-8"
@@ -25,7 +25,12 @@
       <v-btn class="mt-4" block size="large" type="submit" variant="elevated">
         Log in
       </v-btn>
-      <p class="d-flex justify-center mt-4">Don’t have an account? Sign up</p>
+      <v-container class="d-flex justify-center mt-4">
+        <p>
+          Don’t have an account ?
+          <router-link to="/signup"> Sign up </router-link>
+        </p>
+      </v-container>
     </v-form>
 
     <v-alert
@@ -71,6 +76,7 @@ export default {
         .post("http://localhost:3000/sessions", this.formData)
         .then((res) => {
           alert("Cliente cadastrado com sucesso!");
+          // store token
         })
         .catch((erro) => console.log(erro));
       this.errosYup = {};
@@ -106,6 +112,5 @@ export default {
 </script>
 
 <style scoped>
-* {
-}
+
 </style>
