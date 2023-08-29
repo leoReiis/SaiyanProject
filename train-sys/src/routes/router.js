@@ -1,13 +1,14 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import Login from "../components/Login.vue"
 
 export const routes = createRouter({
   history: createWebHashHistory(),
 
   routes: [
     {
-      path: "/",
-    //   component: CardMedicamento,
-    //   name: "cardMedicamento",
+      path: "/login",
+      component: Login,
+      name: "login",
     }
   ],
 });

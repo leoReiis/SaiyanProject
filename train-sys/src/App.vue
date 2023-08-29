@@ -1,13 +1,17 @@
 <template>
-  <h1>Now i cant scape</h1>
+  <RouterView />
 </template>
 
-<script setup>
+<script>
+import Login from "./components/Login.vue"
 
+  export default {
+    components : {Login}
+  }
 </script>
 
 
 
-<style scoped>
+<style>
 
 </style>
