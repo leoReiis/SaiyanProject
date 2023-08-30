@@ -41,7 +41,7 @@
         :items="['bronze', 'silver', 'gold']"
       ></v-select>
 
-      <v-btn class="mt-4" block size="large" type="submit" variant="elevated">
+      <v-btn color = "#143FD5" class="mt-4" block size="large" type="submit" variant="elevated">
         Sign Up
       </v-btn>
       <v-container class="d-flex justify-center mt-4">

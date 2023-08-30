@@ -1,27 +1,36 @@
 <template>
   <v-layout color="grey-lighten-4">
-    <v-toolbar>
+    <v-toolbar color = "#FF4401">
       <img src="/logo.png" alt="Saiya Gym" />
 
       <v-spacer></v-spacer>
 
-      <div class="d-flex align-content-start">
-        <router-link to="/login">
-          <p>Home</p>
+      <v-btn icon>
+        <router-link to="/dashboard">
+          <v-icon>mdi-home</v-icon>
         </router-link>
+      </v-btn>
 
-        <router-link to="/login">
-          <p>Studends</p>
+      <v-btn icon>
+        <router-link to="/students">
+          <v-icon>mdi-account</v-icon>
         </router-link>
+      </v-btn>
 
-        <router-link to="/login">
-          <p>Exercises</p>
-        </router-link>
 
-        <router-link to="/login">
-          <p>Logout</p>
+      <v-btn icon>
+        <router-link to="/exercises">
+          <v-icon>mdi-arm-flex</v-icon>
         </router-link>
-      </div>
+      </v-btn>
+
+
+        <v-btn icon>
+        <router-link to="/login">
+          <v-icon>mdi-logout</v-icon>
+        </router-link>
+      </v-btn>
+
     </v-toolbar>
   </v-layout>
 </template>

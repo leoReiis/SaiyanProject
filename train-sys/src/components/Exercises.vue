@@ -11,11 +11,12 @@
       ></v-text-field>
 
       <v-btn
+        color = "#143FD5"
         @click="registerExercise()"
         class="ml-4"
         size="small"
         type="button"
-        variant="outlined"
+        variant="elevated"
       >
         Create
       </v-btn>

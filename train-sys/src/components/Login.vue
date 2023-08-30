@@ -22,8 +22,8 @@
         placeholder="Password"
         ref="password"
       ></v-text-field>
-
-      <v-btn class="mt-4" block size="large" type="submit" variant="elevated">
+   
+      <v-btn color = "#143FD5" class="mt-4" block size="large" type="submit" variant="elevated">
         Log in
       </v-btn>
       <v-container class="d-flex justify-center mt-4">
