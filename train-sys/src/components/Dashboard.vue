@@ -1,6 +1,8 @@
 <template>
-  <v-container class = "d-flex flex-column mt-8 justify-space-around">
-    <h1>Welcome, {{ this.name }}</h1>
+  <v-container
+    class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
+  >
+    <h1>Welcome back, {{ this.name }}</h1>
     <v-container class="d-flex mt-8">
       <v-card class="mx-auto" width="400" prepend-icon="mdi-fitness">
         <v-card-title>
@@ -9,7 +11,7 @@
         <v-btn>Add</v-btn>
       </v-card>
 
-      <v-card class="mx-auto" width="400" prepend-icon="mdi-fitness">
+      <v-card class="mx-auto ml-4" width="400" prepend-icon="mdi-fitness">
         <v-card-title>
           {{ dashboardData.amount_exercises }} Exercises
         </v-card-title>
