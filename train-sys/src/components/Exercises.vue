@@ -11,7 +11,7 @@
       ></v-text-field>
 
       <v-btn
-        color = "#143FD5"
+        color="#143FD5"
         @click="registerExercise()"
         class="ml-4"
         size="small"
@@ -29,11 +29,15 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in exercisesList" :key="item.id">
           <td>{{ item.description }}</td>
+          <td>
+            <v-btn flat icon size="small"> <v-icon>mdi-delete</v-icon></v-btn>
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -66,7 +70,6 @@ export default {
       })
         .then((res) => {
           this.exercisesList = res.data;
-          console.log(res.data);
         })
         .catch(() => {
           alert(

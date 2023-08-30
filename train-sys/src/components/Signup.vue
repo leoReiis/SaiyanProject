@@ -1,11 +1,11 @@
 <template>
   <v-container
-    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
+    class="w-50 h-auto d-flex flex-column justify-center rounded mt-8 border"
   >
     <h1>Saiya Gym</h1>
     <v-form
       @submit.prevent="handleSingup"
-      class="d-flex flex-column justify-center mt-8"
+      class="d-flex flex-column justify-center mt-2"
     >
       <v-text-field
         v-model="fullName"
@@ -41,10 +41,17 @@
         :items="['bronze', 'silver', 'gold']"
       ></v-select>
 
-      <v-btn color = "#143FD5" class="mt-4" block size="large" type="submit" variant="elevated">
+      <v-btn
+        color="#143FD5"
+        class="mt-4"
+        block
+        size="large"
+        type="submit"
+        variant="elevated"
+      >
         Sign Up
       </v-btn>
-      <v-container class="d-flex justify-center mt-4">
+      <v-container class="d-flex justify-center mt-2">
         <p>
           Already have an account ?
           <router-link to="/login"> Sign in </router-link>
@@ -53,7 +60,7 @@
     </v-form>
 
     <v-alert
-      class="mt-16"
+    
       v-if="hasErrorsYup"
       color="error"
       icon="$error"

@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
+    class="w-50 h-auto d-flex flex-column justify-center rounded mt-8 border"
   >
     <h1>Saiya Gym Login</h1>
     <v-form
@@ -26,7 +26,7 @@
       <v-btn color = "#143FD5" class="mt-4" block size="large" type="submit" variant="elevated">
         Log in
       </v-btn>
-      <v-container class="d-flex justify-center mt-4">
+      <v-container class="d-flex justify-center mt-2">
         <p>
           Don’t have an account ?
           <router-link to="/signup"> Sign up </router-link>
@@ -35,7 +35,7 @@
     </v-form>
 
     <v-alert
-      class="mt-16"
+      class="mt-4"
       v-if="hasErrorsYup"
       color="error"
       icon="$error"

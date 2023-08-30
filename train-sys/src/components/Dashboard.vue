@@ -1,5 +1,5 @@
 <template>
-  <v-container 
+  <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
     <h1>Welcome back, {{ this.name }}</h1>
@@ -9,6 +9,7 @@
           <v-icon>mdi-account</v-icon>
           {{ dashboardData.amount_students }} Students
           <v-btn
+            @click="goToStudentsPage()"
             class="justify-end"
             color="#143FD5"
             type="button"
@@ -18,7 +19,12 @@
         </v-card-title>
       </v-card>
 
-      <v-card border class="mx-auto ml-4" width="400" prepend-icon="mdi-fitness">
+      <v-card
+        border
+        class="mx-auto ml-4"
+        width="400"
+        prepend-icon="mdi-fitness"
+      >
         <v-card-title class="d-flex justify-space-around">
           <v-icon>mdi-arm-flex</v-icon>
           {{ dashboardData.amount_exercises }} Exercises
@@ -51,25 +57,33 @@ export default {
     goToExercisePage() {
       this.$router.push("/exercises");
     },
+
+    goToStudentsPage() {
+      this.$router.push("/students");
+    },
+
+    getDashBoardInfo() {
+      const token = localStorage.getItem("token");
+      axios({
+        url: "http://localhost:3000/dashboard",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          this.dashboardData = res.data;
+        })
+        .catch(() => {
+          alert(
+            "Oops! Something went wrong while fetching the list. Please try again later."
+          );
+        });
+    },
   },
 
   mounted() {
-    const token = localStorage.getItem("token");
-    axios({
-      url: "http://localhost:3000/dashboard",
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        this.dashboardData = res.data;
-      })
-      .catch(() => {
-        alert(
-          "Oops! Something went wrong while fetching the list. Please try again later."
-        );
-      });
+    this.getDashBoardInfo();
   },
 };
 </script>
