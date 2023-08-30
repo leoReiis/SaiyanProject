@@ -2,7 +2,7 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-  <h1>Saiya Gym</h1>
+    <h1>Saiya Gym</h1>
     <v-form
       @submit.prevent="handleSingup"
       class="d-flex flex-column justify-center mt-8"

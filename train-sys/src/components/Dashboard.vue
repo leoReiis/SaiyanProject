@@ -38,7 +38,7 @@ export default {
       url: "http://localhost:3000/dashboard",
       method: "GET",
       headers: {
-        Authorization: `Bearen ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {

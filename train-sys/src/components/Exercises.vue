@@ -6,28 +6,33 @@
     <v-divider></v-divider>
     <v-toolbar>
       <v-text-field
-        class="mt-4"
-        hide-details
-        prepend-icon="mdi-magnify"
+        v-model="description"
+        placeholder="New Exercise"
       ></v-text-field>
 
-      <v-btn class="ml-4" size="small" type="submit" variant="outlined">
-        New
+      <v-btn
+        @click="registerExercise()"
+        class="ml-4"
+        size="small"
+        type="button"
+        variant="outlined"
+      >
+        Create
       </v-btn>
     </v-toolbar>
   </v-container>
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded border mt-8"
   >
-    <v-table fixed-header height="300px">
+    <v-table fixed-header height="250px">
       <thead>
         <tr>
-          <th class="text-left">Name</th>
+          <th>Name</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in exercisesList" :key="item.id">
-          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -41,26 +46,52 @@ export default {
   data() {
     return {
       exercisesList: [],
+      description: "",
     };
   },
 
   mounted() {
-    const token = localStorage.getItem("token");
-    axios({
-      url: "http://localhost:3000/exercises",
-      method: "GET",
-      headers: {
-        Authorization: `Bearen ${token}`,
-      },
-    })
-      .then((res) => {
-        this.exercisesList = res.data;
+    this.getExerciseList();
+  },
+  methods: {
+    getExerciseList() {
+      const token = localStorage.getItem("token");
+      axios({
+        url: "http://localhost:3000/exercises",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch(() => {
-        alert(
-          "Oops! Something went wrong while fetching the list. Please try again later."
-        );
-      });
+        .then((res) => {
+          this.exercisesList = res.data;
+          console.log(res.data);
+        })
+        .catch(() => {
+          alert(
+            "Oops! Something went wrong while fetching the list. Please try again later."
+          );
+        });
+    },
+    registerExercise() {
+      const token = localStorage.getItem("token");
+      axios({
+        url: "http://localhost:3000/exercises",
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { description: this.description },
+      })
+        .then(() => {
+          alert("Exercise Created!");
+          this.description = "";
+          this.getExerciseList();
+        })
+        .catch(() => {
+          alert("Oops! Something went wrong.");
+        });
+    },
   },
 };
 </script>
