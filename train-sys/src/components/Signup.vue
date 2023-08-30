@@ -2,6 +2,7 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
+  <h1>Saiya Gym</h1>
     <v-form
       @submit.prevent="handleSingup"
       class="d-flex flex-column justify-center mt-8"
@@ -43,6 +44,12 @@
       <v-btn class="mt-4" block size="large" type="submit" variant="elevated">
         Sign Up
       </v-btn>
+      <v-container class="d-flex justify-center mt-4">
+        <p>
+          Already have an account ?
+          <router-link to="/login"> Sign in </router-link>
+        </p>
+      </v-container>
     </v-form>
 
     <v-alert
@@ -92,11 +99,17 @@ export default {
           password: this.password,
           type_plan: this.plan,
         })
-        .then((res) => {
-          alert("Cliente cadastrado com sucesso!");
-          // store token
+        .then(() => {
+          alert(
+            "Welcome to the saiya family! Let's embark on an amazing journey together."
+          );
+          this.$router.push("/login");
         })
-        .catch((erro) => console.log(erro));
+        .catch(() =>
+          alert(
+            "Oops, something's not quite right. It seems there was a hiccup on our end. Please try again later or contact our support team for assistance. We're here to help!"
+          )
+        );
       this.errosYup = {};
     },
 
@@ -132,10 +145,6 @@ export default {
         if (error instanceof yup.ValidationError) {
           this.errosYup = captureErrorYup(error);
         }
-      }
-
-      if (!this.hasErrorsYup) {
-        // limpar Form ? Redirecionar ?
       }
     },
   },

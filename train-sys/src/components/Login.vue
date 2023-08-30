@@ -20,6 +20,7 @@
         type="password"
         hint="Enter your password"
         placeholder="Password"
+        ref="password"
       ></v-text-field>
 
       <v-btn class="mt-4" block size="large" type="submit" variant="elevated">
@@ -57,7 +58,6 @@ export default {
     return {
       email: "",
       password: "",
-      formData: {},
       errosYup: {},
     };
   },
@@ -68,17 +68,25 @@ export default {
   },
   methods: {
     logIn() {
-      this.formData = {
+      const formData = {
         email: this.email,
         password: this.password,
       };
+
       axios
-        .post("http://localhost:3000/sessions", this.formData)
+        .post("http://localhost:3000/sessions", formData)
         .then((res) => {
-          alert("Cliente cadastrado com sucesso!");
-          // store token
+          localStorage.setItem("name", res.data.name);
+          localStorage.setItem("token", res.data.token);
+          alert("Great to see you again at the saiyan app");
+          this.$router.push("/dashboard");
         })
-        .catch((erro) => console.log(erro));
+        .catch(() => {
+          alert(
+            "Oops! Check your email and password, then try again. If you're still stuck, a password reset could save the day."
+          );
+          this.$refs.password.focus();
+        });
       this.errosYup = {};
     },
 
@@ -102,15 +110,9 @@ export default {
           this.errosYup = captureErrorYup(error);
         }
       }
-
-      if (!this.hasErrorsYup) {
-        // limpar Form ? Redirecionar ?
-      }
     },
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
