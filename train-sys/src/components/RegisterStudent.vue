@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="h-auto d-flex flex-column justify-center rounded mt-16 border"
+    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
     <span class="d-flex justify-end">
       <v-icon>mdi-cloud-outline</v-icon>
@@ -74,10 +74,14 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          type="number"
           v-model="houseNumber"
           hint="Enter house number"
           placeholder="Number"
-          :rules="[(v) => !!v || 'Invalid number']"
+          :rules="[
+            (v) => !!v || 'Invalid number',
+            (v) => v >= 0 || 'Invalid street number',
+          ]"
         ></v-text-field>
       </v-container>
 

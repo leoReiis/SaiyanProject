@@ -43,6 +43,7 @@
       </v-card>
     </v-container>
   </v-container>
+  <v-img :width="300" cover src="/son-goku.jpg" class="son-goku"></v-img>
 </template>
 
 <script>
@@ -90,4 +91,12 @@ export default {
   },
 };
 </script>
-<style></style>
+
+<style scoped>
+.son-goku {
+  position: absolute;
+  right: 0px;
+  bottom: 100px;
+}
+
+</style>

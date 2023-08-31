@@ -41,7 +41,9 @@
         v-model="plan"
         variant="solo"
         label="Plano"
-        :items="['bronze', 'silver', 'gold']"
+        :items = "this.planList"
+        item-title="title"
+        item-value ="value"
       ></v-select>
 
       <v-btn
@@ -68,6 +70,7 @@
       </ul>
     </v-alert>
   </v-container>
+  <v-img :width="300" cover src="/songohan.png" class="son-gohan"></v-img>
 </template>
 
 <script>
@@ -82,6 +85,11 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
+      planList: [
+        { value: "bronze", title: "Bronze" },
+        { value: "silver", title: "Silver" },
+        { value: "gold", title: "Gold" },
+      ],
       plan: "bronze",
       errosYup: {},
     };
@@ -165,4 +173,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.son-gohan {
+  position: absolute;
+  right: 0px;
+  bottom: 100px;
+}
+</style>

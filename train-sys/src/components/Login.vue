@@ -56,6 +56,8 @@
       </ul>
     </v-alert>
   </v-container>
+
+  <v-img :width="300" cover src="/songohan.png" class="son-gohan"></v-img>
 </template>
 
 <script>
@@ -125,4 +127,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.son-gohan {
+  position: absolute;
+  right: 0px;
+  bottom: 100px;
+}
+</style>
