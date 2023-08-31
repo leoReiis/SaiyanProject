@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard.vue"
 import Exercises from "../components/Exercises.vue"
 import Students from "../components/Students.vue"
 import RegisterStudent from "../components/RegisterStudent.vue"
+import Training from "../components/Training.vue"
 
 export const routes = createRouter({
   history: createWebHashHistory(),
@@ -40,6 +41,11 @@ export const routes = createRouter({
       path: "/registerstudent",
       component: RegisterStudent,
       name: "registerStudent"
+    },
+    {
+      path: "/training",
+      component: Training,
+      name: Training
     }
   ],
 });

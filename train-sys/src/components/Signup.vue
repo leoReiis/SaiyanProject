@@ -2,10 +2,13 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-8 border"
   >
-    <h1>Saiya Gym</h1>
+    <span class="d-flex justify-space-between">
+      <h1>Saiya Gym</h1>
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
     <v-form
       @submit.prevent="handleSingup"
-      class="d-flex flex-column justify-center mt-2"
+      class="d-flex flex-column justify-center mt-8"
     >
       <v-text-field
         v-model="fullName"
@@ -59,13 +62,7 @@
       </v-container>
     </v-form>
 
-    <v-alert
-    
-      v-if="hasErrorsYup"
-      color="error"
-      icon="$error"
-      title="Error"
-    >
+    <v-alert v-if="hasErrorsYup" color="error" icon="$error" title="Error">
       <ul>
         <li v-for="(error, field) in errosYup" :key="field">* {{ error }}</li>
       </ul>

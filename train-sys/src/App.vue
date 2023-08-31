@@ -1,5 +1,5 @@
 <template>
-  <Header></Header>
+  <Header v-if="displayMenu"></Header>
   <RouterView />
   <span class="footer">
     <Footer></Footer>
@@ -12,6 +12,11 @@ import Footer from "./components/Footer.vue";
 
 export default {
   components: { Header, Footer },
+  computed: {
+    displayMenu() {
+      return !(this.$route.path === "/signup" || this.$route.path === "/login");
+    },
+  },
 };
 </script>
 

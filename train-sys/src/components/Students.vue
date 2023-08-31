@@ -2,15 +2,28 @@
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <h1>Students</h1>
+    <span class="d-flex justify-end">
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
+
+    <v-container class="d-flex justify-space-between">
+      <h1>Students</h1>
+      <v-btn
+        @click="goToRegisterStudentPage()"
+        color="#143FD5"
+        type="button"
+        variant="elevated"
+        >New</v-btn
+      >
+    </v-container>
     <v-divider></v-divider>
-    <v-btn
-      @click="goToRegisterStudentPage()"
-      color="#143FD5"
-      type="button"
-      variant="elevated"
-      >New</v-btn
-    >
+    <v-container class="d-flex justify-space-between">
+      <v-text-field hint="Enter the student name" placeholder="Student Name">
+      </v-text-field>
+      <v-btn icon flat>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+    </v-container>
   </v-container>
 
   <v-container
@@ -27,7 +40,7 @@
         <tr v-for="student in studentList.students" :key="student.id">
           <td>{{ student.name }}</td>
           <td>
-            <h2>buttons here</h2> 
+            <h2>buttons here</h2>
           </td>
         </tr>
       </tbody>

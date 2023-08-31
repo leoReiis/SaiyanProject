@@ -2,9 +2,22 @@
   <v-container
     class="h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <h1>New Student</h1>
+    <span class="d-flex justify-end">
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
+
+    <v-container class="d-flex justify-space-between">
+      <h1>New Student</h1>
+      <v-btn icon>
+        <router-link to="/students" class="icon-color">
+          <v-icon>mdi-arrow-left-bold</v-icon>
+        </router-link>
+      </v-btn>
+    </v-container>
+
     <v-form
-      @submit.prevent="registerStudent()"
+      ref="form"
+      @submit.prevent="handleSubmit()"
       class="d-flex flex-column justify-center mt-8"
     >
       <v-container class="d-flex">
@@ -12,13 +25,16 @@
           v-model="fullName"
           hint="Enter your full name"
           placeholder="Full name"
+          :rules="[(v) => !!v || 'Invalid name']"
         >
         </v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
           v-model="email"
+          type="email"
           hint="Enter your email"
           placeholder="Email"
+          :rules="[(v) => !!v || 'Invalid email']"
         ></v-text-field>
       </v-container>
 
@@ -27,12 +43,14 @@
           v-model="contact"
           hint="Enter your contact"
           placeholder="Contact"
+          :rules="[(v) => !!v || 'Invalid contact']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
           v-model="birthDate"
           hint="Enter your birth date"
           type="date"
+          :rules="[(v) => !!v || 'Invalid birth date']"
         ></v-text-field>
       </v-container>
 
@@ -40,9 +58,11 @@
 
       <v-container class="d-flex">
         <v-text-field
+          @blur="getZipCodeData(this.zipCode)"
           v-model="zipCode"
           hint="Enter your zip code"
           placeholder="Zip Code"
+          :rules="[(v) => !!v || 'Invalid zipcode']"
         >
         </v-text-field>
         <v-spacer></v-spacer>
@@ -50,12 +70,14 @@
           v-model="streetName"
           hint="Enter street name"
           placeholder="Street name"
+          :rules="[(v) => !!v || 'Invalid street name']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
           v-model="houseNumber"
           hint="Enter house number"
           placeholder="Number"
+          :rules="[(v) => !!v || 'Invalid number']"
         ></v-text-field>
       </v-container>
 
@@ -64,18 +86,21 @@
           v-model="state"
           hint="Enter your state"
           placeholder="State"
+          :rules="[(v) => !!v || 'Invalid state']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
           v-model="district"
           placeholder="District"
           hint="District"
+          :rules="[(v) => !!v || 'Invalid district']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
           v-model="city"
           placeholder="City"
           hint="Enter your city"
+          :rules="[(v) => !!v || 'Invalid city']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
@@ -96,18 +121,6 @@
         Register
       </v-btn>
     </v-form>
-
-    <v-alert
-      class="mt-16"
-      v-if="hasErrorsYup"
-      color="error"
-      icon="$error"
-      title="Error"
-    >
-      <ul>
-        <li v-for="(error, field) in errosYup" :key="field">* {{ error }}</li>
-      </ul>
-    </v-alert>
   </v-container>
 </template>
 
@@ -128,9 +141,22 @@ export default {
       district: "",
       city: "",
       complement: "",
+      yupError: {},
     };
   },
+
   methods: {
+    async handleSubmit() {
+      const { valid } = await this.$refs.form.validate();
+
+      if (!valid) {
+        alert("Oops! It looks like you forgot to fill in a required field.");
+        return;
+      }
+
+      this.registerStudent();
+    },
+
     registerStudent() {
       const token = localStorage.getItem("token");
       const newStudent = {
@@ -156,28 +182,39 @@ export default {
       })
         .then(() => {
           alert("Student Registered!");
-          this.clearFormFields();
+          this.$refs.form.reset();
         })
         .catch(() => {
           alert("Oops! Something went wrong.");
         });
     },
 
-    clearFormFields() {
-      this.fullName = "";
-      this.email = "";
-      this.contact = "";
-      this.birthDate = "";
-      this.zipCode = "";
-      this.streetName = "";
-      this.houseNumber = "";
-      this.district = "";
-      this.city = "";
-      this.state = "";
-      this.complement = "";
+    getZipCodeData(zipCode) {
+      if (this.zipCode.length == 8) {
+        axios({
+          url: `http://viacep.com.br/ws/${zipCode}/json/`,
+        })
+          .then((res) => {
+            this.zipCodeData = res.data;
+            this.streetName = res.data.logradouro;
+            this.city = res.data.localidade;
+            this.district = res.data.bairro;
+            this.state = res.data.uf;
+            this.complement = res.data.complemento;
+          })
+          .catch(() => {
+            alert(
+              "Oops! Something went wrong while fetching the list. Please try again later."
+            );
+          });
+      }
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.icon-color {
+  color: #143fd5;
+}
+</style>

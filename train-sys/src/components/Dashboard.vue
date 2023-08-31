@@ -2,7 +2,10 @@
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <h1>Welcome back, {{ this.name }}</h1>
+    <span class="d-flex justify-space-between">
+      <h1>Welcome back, {{ this.name }}</h1>
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
     <v-container class="d-flex mt-8">
       <v-card border class="mx-auto" width="400" prepend-icon="mdi-fitness">
         <v-card-title class="d-flex justify-space-around">
@@ -14,7 +17,7 @@
             color="#143FD5"
             type="button"
             variant="elevated"
-            >Add</v-btn
+            >Show</v-btn
           >
         </v-card-title>
       </v-card>
@@ -33,7 +36,7 @@
             color="#143FD5"
             type="button"
             variant="elevated"
-            >Add</v-btn
+            >Show</v-btn
           >
         </v-card-title>
         <v-card-text> </v-card-text>

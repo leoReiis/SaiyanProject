@@ -2,11 +2,15 @@
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <h1>Exercises</h1>
+    <span class="d-flex justify-space-between">
+      <h1>Exercises</h1>
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
     <v-divider></v-divider>
     <v-toolbar>
       <v-text-field
         v-model="description"
+        ref="description"
         placeholder="New Exercise"
       ></v-text-field>
 
@@ -36,7 +40,9 @@
         <tr v-for="item in exercisesList" :key="item.id">
           <td>{{ item.description }}</td>
           <td>
-            <v-btn flat icon size="small"> <v-icon>mdi-delete</v-icon></v-btn>
+            <v-btn @click="deleteExercise(item.id)" flat icon size="small">
+              <v-icon>mdi-delete</v-icon></v-btn
+            >
           </td>
         </tr>
       </tbody>
@@ -78,6 +84,14 @@ export default {
         });
     },
     registerExercise() {
+      if (!this.description) {
+        alert("Exercise name can't be empty!");
+        this.$refs.description.focus();
+        return;
+      }
+
+      //check if exercise exists
+
       const token = localStorage.getItem("token");
       axios({
         url: "http://localhost:3000/exercises",
@@ -95,6 +109,22 @@ export default {
         .catch(() => {
           alert("Oops! Something went wrong.");
         });
+    },
+
+    deleteExercise(id) {
+      // seems like the api doesnt support the delete method yet
+      const userConfirmed = window.confirm(
+        "Are you sure you want to delete this exercise?"
+      );
+
+      if (userConfirmed) {
+        axios
+          .delete(`http://localhost:3000/exercises/${id}`, {})
+          .then(() => {
+            alert("Sucess!");
+          })
+          .catch(() => alert("This app doesn't support delete methods yet!"));
+      }
     },
   },
 };

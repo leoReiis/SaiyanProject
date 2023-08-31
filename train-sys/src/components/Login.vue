@@ -2,7 +2,10 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-8 border"
   >
-    <h1>Saiya Gym Login</h1>
+    <span class="d-flex justify-space-between">
+      <h1>Saiya Gym Login</h1>
+      <v-icon>mdi-cloud-outline</v-icon>
+    </span>
     <v-form
       @submit.prevent="handleSubmit"
       class="d-flex flex-column justify-center mt-8"
@@ -22,8 +25,15 @@
         placeholder="Password"
         ref="password"
       ></v-text-field>
-   
-      <v-btn color = "#143FD5" class="mt-4" block size="large" type="submit" variant="elevated">
+
+      <v-btn
+        color="#143FD5"
+        class="mt-4"
+        block
+        size="large"
+        type="submit"
+        variant="elevated"
+      >
         Log in
       </v-btn>
       <v-container class="d-flex justify-center mt-2">
