@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       today: this.getCurrentDay(),
-      active_tab: this.getActiveTab("sabado"), // hardCoded
+      active_tab: this.getActiveTab(this.getCurrentDay()), // ngl smells bad
       tabs: [
         { id: 1, name: "Monday", value: "segunda" },
         { id: 2, name: "Tuesday", value: "terca" },
@@ -80,7 +80,6 @@ export default {
     },
 
     getActiveTab(weekDay) {
-      debugger;
       switch (weekDay) {
         case "segunda":
           return 0;
@@ -105,6 +104,7 @@ export default {
       }
     },
     getStudentWorkout(weekDay) {
+      // hitting the api multiple times, one for each click
       const token = localStorage.getItem("token");
       axios({
         url: `http://localhost:3000/workouts?student_id=${this.studentData.userId}`,
