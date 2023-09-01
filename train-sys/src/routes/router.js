@@ -6,6 +6,7 @@ import Exercises from "../components/Exercises.vue"
 import Students from "../components/Students.vue"
 import RegisterStudent from "../components/RegisterStudent.vue"
 import Training from "../components/Training.vue"
+import WorkoutView from "../components/WorkoutView.vue"
 
 export const routes = createRouter({
   history: createWebHashHistory(),
@@ -46,6 +47,11 @@ export const routes = createRouter({
       path: "/training",
       component: Training,
       name: Training
+    },
+    {
+      path: "/workoutview",
+      component: WorkoutView,
+      name: WorkoutView
     }
   ],
 });

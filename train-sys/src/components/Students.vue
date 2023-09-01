@@ -47,6 +47,7 @@
           <td>
             <span class="d-flex justify-space-between">
               <v-btn
+                @click="goToViewWorkoutPage(student.id, student.name)"
                 class="justify-end"
                 color="#143FD5"
                 type="button"
@@ -84,6 +85,13 @@ export default {
     goToWorkoutPage(userId, userName) {
       this.$router.push({
         path: "/training",
+        query: { id: userId, name: userName },
+      });
+    },
+
+    goToViewWorkoutPage(userId, userName) {
+      this.$router.push({
+        path: "/workoutview",
         query: { id: userId, name: userName },
       });
     },
