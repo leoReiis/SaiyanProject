@@ -11,17 +11,17 @@
       <h2>Today</h2>
     </v-container>
     <v-checkbox
-      v-for="workout in workoutData.workouts"
+      v-for="workout in auxWorkoutData.workouts"
       :key="workout.id"
       :label="`${workout.exercise_description} | ${workout.weight} Kg | ${workout.repetitions} Reps | ${workout.break_time} seconds of break`"
       @change="completeWorkoutPost(workout.id, workout.day)"
     ></v-checkbox>
-    <v-divider></v-divider>
-    <v-tabs grow v-model="active_tab">
+
+    <v-tabs show-arrows grow v-model="active_tab">
       <v-tab
         v-for="tab of tabs"
         :key="tab.id"
-        @click="getStudentWorkout(tab.value)"
+        @click="filterWorkoutData(tab.value)"
       >
         {{ tab.name }}
       </v-tab>
@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       today: this.getCurrentDay(),
-      active_tab: this.getActiveTab(this.getCurrentDay()), // ngl smells bad
+      active_tab: this.getActiveTab(this.getCurrentDay()),
       tabs: [
         { id: 1, name: "Monday", value: "segunda" },
         { id: 2, name: "Tuesday", value: "terca" },
@@ -57,6 +57,9 @@ export default {
         userName: this.$route.query.name,
       },
       workoutData: [],
+      auxWorkoutData: {
+        workouts: [],
+      },
       todaysWorkout: "",
     };
   },
@@ -103,10 +106,18 @@ export default {
           return 6;
       }
     },
-    getStudentWorkout(weekDay) {
-      // hitting the api multiple times, one for each click
+
+    filterWorkoutData(weekDay) {
+      this.auxWorkoutData = { ...this.workoutData };
+      this.auxWorkoutData.workouts = this.auxWorkoutData.workouts.filter(
+        (workout) => workout.day === weekDay
+      );
+      this.displayStudentWorkout(this.auxWorkoutData.workouts);
+    },
+
+    async getStudentWorkout(weekDay) {
       const token = localStorage.getItem("token");
-      axios({
+      await axios({
         url: `http://localhost:3000/workouts?student_id=${this.studentData.userId}`,
         method: "GET",
         headers: {
@@ -115,10 +126,7 @@ export default {
       })
         .then((res) => {
           this.workoutData = res.data;
-          this.workoutData.workouts = this.workoutData.workouts.filter(
-            (workout) => workout.day === weekDay
-          );
-          this.displayStudentWorkout(this.workoutData.workouts);
+          this.filterWorkoutData(weekDay);
         })
         .catch(() => {
           alert(

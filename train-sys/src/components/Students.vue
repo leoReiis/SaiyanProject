@@ -25,7 +25,7 @@
       >
       </v-text-field>
 
-      <v-btn @click="searchStudent(this.searchStudentName)" icon flat>
+      <v-btn @click="searchStudent(searchStudentName)" icon flat>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-container>
@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="student in studentList.students" :key="student.id">
+        <tr v-for="student in auxStudentList.students" :key="student.id">
           <td>{{ student.name }}</td>
           <td>
             <span class="d-flex justify-space-between">
@@ -76,7 +76,12 @@ import axios from "axios";
 export default {
   data() {
     return {
-      studentList: [],
+      studentList: {
+        students: [],
+      },
+      auxStudentList: {
+        students: [],
+      },
       searchStudentName: "",
     };
   },
@@ -111,6 +116,7 @@ export default {
       })
         .then((res) => {
           this.studentList = res.data;
+          this.auxStudentList = res.data;
         })
         .catch(() => {
           alert(
@@ -119,11 +125,14 @@ export default {
         });
     },
 
-    searchStudent(myArray, nameToFind) {
-      this.studentList = myArray.filter((student) => {
-        student.name.includes(nameToFind);
-      });
-      console.log(this.studentList.student);
+    searchStudent(nameToFind) {
+      this.auxStudentList.students = [...this.studentList.students];
+
+      this.auxStudentList.students = this.studentList.students.filter(
+        (student) => {
+          return student.name.toLowerCase().includes(nameToFind.toLowerCase());
+        }
+      );
     },
   },
 
