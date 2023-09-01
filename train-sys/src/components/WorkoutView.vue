@@ -2,9 +2,15 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <span class="d-flex justify-end">
+    <span class="d-flex justify-space-between">
+      <v-btn icon>
+        <router-link to="/students" class="icon-color">
+          <v-icon>mdi-arrow-left-bold</v-icon>
+        </router-link>
+      </v-btn>
       <v-icon>mdi-cloud-outline</v-icon>
     </span>
+
     <h1>Workout - {{ this.studentData.userName }}</h1>
     <v-divider></v-divider>
     <v-container class="d-flex justify-space-between">

@@ -2,6 +2,12 @@
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
+    <v-btn icon>
+      <router-link to="/dashboard" class="icon-color">
+        <v-icon>mdi-arrow-left-bold</v-icon>
+      </router-link>
+    </v-btn>
+
     <span class="d-flex justify-space-between">
       <h1>Exercises</h1>
       <v-icon>mdi-cloud-outline</v-icon>
@@ -90,8 +96,6 @@ export default {
         return;
       }
 
-      //check if exercise exists
-
       const token = localStorage.getItem("token");
       axios({
         url: "http://localhost:3000/exercises",
@@ -112,7 +116,7 @@ export default {
     },
 
     deleteExercise(id) {
-      // seems like the api doesnt support the delete method yet
+      //  waiting for api support
       const userConfirmed = window.confirm(
         "Are you sure you want to delete this exercise?"
       );

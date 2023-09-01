@@ -2,8 +2,14 @@
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
-    <span class="d-flex justify-end">
+    <span class="d-flex justify-space-between">
+      <v-btn icon>
+        <router-link to="/dashboard" class="icon-color">
+          <v-icon>mdi-arrow-left-bold</v-icon>
+        </router-link>
+      </v-btn>
       <v-icon>mdi-cloud-outline</v-icon>
+      
     </span>
 
     <v-container class="d-flex justify-space-between">
@@ -15,6 +21,7 @@
         variant="elevated"
         >New</v-btn
       >
+      
     </v-container>
     <v-divider></v-divider>
     <v-container class="d-flex justify-space-between">
@@ -126,8 +133,12 @@ export default {
     },
 
     searchStudent(nameToFind) {
-      this.auxStudentList.students = [...this.studentList.students];
+      if (!nameToFind) {
+        this.getStudentList();
+        return;
+      }
 
+      this.auxStudentList.students = [...this.studentList.students];
       this.auxStudentList.students = this.studentList.students.filter(
         (student) => {
           return student.name.toLowerCase().includes(nameToFind.toLowerCase());

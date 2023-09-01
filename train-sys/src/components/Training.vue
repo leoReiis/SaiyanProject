@@ -2,6 +2,11 @@
   <v-container
     class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
   >
+    <v-btn icon>
+      <router-link to="/students" class="icon-color">
+        <v-icon>mdi-arrow-left-bold</v-icon>
+      </router-link>
+    </v-btn>
     <v-container>
       <v-text-field
         variant="outlined"
