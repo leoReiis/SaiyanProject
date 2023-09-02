@@ -20,10 +20,12 @@
       <p>Password</p>
       <v-text-field
         v-model="password"
-        type="password"
         hint="Enter your password"
         placeholder="Password"
         ref="password"
+        @click:append="showPassword = !showPassword"
+        :type="showPassword ? 'text' : 'password'"
+        :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
       ></v-text-field>
 
       <v-btn
@@ -57,7 +59,13 @@
     </v-alert>
   </v-container>
 
-  <v-img :width="300" cover src="/songohan.png" class="son-gohan"></v-img>
+  <v-img
+    :width="300"
+    cover
+    src="/songohan.png"
+    class="son-gohan"
+    alt="kid-gohan-dragonball"
+  ></v-img>
 </template>
 
 <script>
@@ -68,6 +76,7 @@ import { captureErrorYup } from "../utils/captureErroYup.js";
 export default {
   data() {
     return {
+      showPassword: false,
       email: "",
       password: "",
       errosYup: {},

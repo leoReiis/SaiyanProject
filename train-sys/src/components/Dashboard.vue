@@ -43,7 +43,7 @@
       </v-card>
     </v-container>
   </v-container>
-  <v-img :width="300" cover src="/son-goku.jpg" class="son-goku"></v-img>
+  <v-img :width="300" cover src="/son-goku.jpg" class="son-goku" alt ="kid-goku-dragonball"></v-img>
 </template>
 
 <script>
@@ -70,7 +70,6 @@ export default {
       const token = localStorage.getItem("token");
       axios({
         url: "http://localhost:3000/dashboard",
-        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },

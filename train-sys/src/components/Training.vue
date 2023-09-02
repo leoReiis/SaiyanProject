@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="w-50 h-auto d-flex flex-column justify-center rounded mt-16 border"
+    class="w-50 h-auto d-flex flex-column justify-center rounded mt-2 border"
   >
     <v-btn icon>
       <router-link to="/students" class="icon-color">
@@ -36,7 +36,7 @@
           placeholder="Reps"
           :rules="[
             (v) => !!v || 'Reps is a required field',
-            (v) => v > 0 || 'Rep amount must be greater than 1',
+            (v) => v > 0 || 'Rep amount must be greater than 0',
           ]"
         >
         </v-text-field>
@@ -52,6 +52,7 @@
         ></v-text-field>
 
         <v-spacer></v-spacer>
+        <!-- type = time.. find component that shows only seconds for the rest time -->
         <v-text-field
           v-model="breaktime"
           hint="Rest time in seconds"

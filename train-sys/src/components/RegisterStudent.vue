@@ -46,12 +46,17 @@
           :rules="[(v) => !!v || 'Invalid contact']"
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-text-field
-          v-model="birthDate"
-          hint="Enter your birth date"
-          type="date"
-          :rules="[(v) => !!v || 'Invalid birth date']"
-        ></v-text-field>
+
+        <div class="w-50 d-flex align-iten-center">
+          <VueDatePicker
+            v-model="birthDate"
+            hint="Enter your birth date"
+            :max-date="new Date()"
+            cancelText="Cancel"
+            selectText="Select"
+            :enable-time-picker="false"
+          />
+        </div>
       </v-container>
 
       <v-divider></v-divider>
@@ -130,6 +135,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data() {
@@ -163,11 +169,12 @@ export default {
 
     registerStudent() {
       const token = localStorage.getItem("token");
+      const auxBirthDate = moment(this.birthDate).format("MM/DD/YYYY");
       const newStudent = {
         name: this.fullName,
         email: this.email,
         contact: this.contact,
-        date_birth: this.birthDate,
+        date_birth: auxBirthDate,
         cep: this.zipCode,
         street: this.streetName,
         number: this.houseNumber,

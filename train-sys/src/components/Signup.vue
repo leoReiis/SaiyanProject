@@ -27,6 +27,7 @@
         label="Password"
         type="password"
         hint="Enter your password"
+        counter
       ></v-text-field>
 
       <v-text-field
@@ -35,15 +36,16 @@
         hint="Confirm your password"
         type="password"
         ref="confirmPassword"
+        counter
       ></v-text-field>
 
       <v-select
         v-model="plan"
         variant="solo"
         label="Plano"
-        :items = "this.planList"
+        :items="this.planList"
         item-title="title"
-        item-value ="value"
+        item-value="value"
       ></v-select>
 
       <v-btn
@@ -70,7 +72,7 @@
       </ul>
     </v-alert>
   </v-container>
-  <v-img :width="300" cover src="/songohan.png" class="son-gohan"></v-img>
+  <v-img :width="300" cover src="/songohan.png" class="son-gohan" alt ="kid-gohan-dragonball"></v-img>
 </template>
 
 <script>
@@ -102,8 +104,7 @@ export default {
         this.$refs.confirmPassword.focus();
         return;
       }
-
-      debugger;
+      
       axios
         .post("http://localhost:3000/users", {
           name: this.fullName,

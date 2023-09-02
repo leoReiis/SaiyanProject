@@ -20,7 +20,8 @@
       v-for="workout in auxWorkoutData.workouts"
       :key="workout.id"
       :label="`${workout.exercise_description} | ${workout.weight} Kg | ${workout.repetitions} Reps | ${workout.break_time} seconds of break`"
-      @change="completeWorkoutPost(workout.id, workout.day)"
+      v-model="workout.checked"
+      @change="completeWorkoutPost(workout)"
     ></v-checkbox>
 
     <v-tabs show-arrows grow v-model="active_tab">
@@ -67,6 +68,7 @@ export default {
         workouts: [],
       },
       todaysWorkout: "",
+      checkBoxValue: false,
     };
   },
 
@@ -118,6 +120,9 @@ export default {
       this.auxWorkoutData.workouts = this.auxWorkoutData.workouts.filter(
         (workout) => workout.day === weekDay
       );
+      this.auxWorkoutData.workouts.forEach((workout) => {
+        workout.checked = false;
+      });
       this.displayStudentWorkout(this.auxWorkoutData.workouts);
     },
 
@@ -147,12 +152,19 @@ export default {
       });
     },
 
-    completeWorkoutPost(workoutId, workoutDay) {
+    completeWorkoutPost(workout) {
+      if (!workout.checked) {
+        alert(
+          "The API currently only supports checking items as completed. Unchecking items is not yet supported."
+        );
+        return;
+      }
+
       const token = localStorage.getItem("token");
       const workoutData = {
         student_id: parseInt(this.studentData.userId),
-        workout_id: workoutId,
-        day_of_week: workoutDay,
+        workout_id: workout.id,
+        day_of_week: workout.day,
       };
       axios({
         url: "http://localhost:3000/workouts/check",

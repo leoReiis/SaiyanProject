@@ -23,7 +23,7 @@
         </router-link>
       </v-btn>
 
-      <v-btn icon>
+      <v-btn icon> 
         <router-link to="/login" class = "icon-color">
           <v-icon>mdi-logout</v-icon>
         </router-link>
