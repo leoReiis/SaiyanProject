@@ -19,7 +19,7 @@ Para executar o **Saiya Gym** em seu ambiente local, siga as etapas abaixo:
 1. **Clone o repositório**: Faça o clone deste repositório para sua máquina local usando o comando:
 
     ```
-    git clone https://github.com/leoReiis/saiya-gym.git
+    git clone https://github.com/leoReiis/TrainSys.git
     ```
 
 2. **Instale as dependências**: Abra um terminal na pasta do projeto e execute o seguinte comando para instalar as dependências do projeto:
