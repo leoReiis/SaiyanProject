@@ -9,17 +9,17 @@
     </v-btn>
     <v-container>
       <v-text-field
+        v-model="studentData.userName"
         variant="outlined"
         disabled
         label="Student Name"
-        v-model="studentData.userName"
       ></v-text-field>
     </v-container>
 
     <v-form ref="form" @submit.prevent="handleSubmit()">
       <v-container>
         <v-select
-          v-model="exerciseDescription"
+          v-model="workoutData.exerciseDescription"
           variant="solo"
           label="Exercise"
           :items="getExerciseDescription()"
@@ -29,7 +29,7 @@
 
       <v-container class="d-flex">
         <v-text-field
-          v-model="reps"
+          v-model="workoutData.reps"
           type="number"
           label="Reps"
           hint="Amount of reps"
@@ -43,7 +43,7 @@
 
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="weight"
+          v-model="workoutData.weight"
           type="number"
           label="Kg"
           hint="Amount of weight"
@@ -54,7 +54,7 @@
         <v-spacer></v-spacer>
         <!-- type = time.. find component that shows only seconds for the rest time -->
         <v-text-field
-          v-model="breaktime"
+          v-model="workoutData.breaktime"
           hint="Rest time in seconds"
           placeholder="Rest"
           :rules="[(v) => !!v || 'Rest is a required field']"
@@ -73,7 +73,7 @@
       </v-container>
       <v-container>
         <v-textarea
-          v-model="observations"
+          v-model="workoutData.observations"
           outlined
           placeholder="Notes"
         ></v-textarea>
@@ -103,11 +103,14 @@ export default {
         userId: this.$route.query.id,
         userName: this.$route.query.name,
       },
-      reps: null,
-      weight: null,
-      breaktime: null,
-      observations: "",
-      exerciseDescription: "",
+      workoutData: {
+        reps: null,
+        weight: null,
+        breaktime: null,
+        observations: "",
+        exerciseDescription: "",
+      },
+
       exerciseList: [],
       today: this.getCurrentDay(),
       weekDayList: [
@@ -179,19 +182,21 @@ export default {
     },
 
     registerWorkOut() {
-      debugger;
       const token = localStorage.getItem("token");
-      const exerciseId = this.getExerciseId(this.exerciseDescription);
+      const exerciseId = this.getExerciseId(
+        this.workoutData.exerciseDescription
+      );
 
       const workout = {
         student_id: this.studentData.userId,
         exercise_id: exerciseId,
-        repetitions: this.reps,
-        weight: this.weight,
-        break_time: this.breaktime,
-        observations: this.observations,
+        repetitions: this.workoutData.reps,
+        weight: this.workoutData.weight,
+        break_time: this.workoutData.breaktime,
+        observations: this.workoutData.observations,
         day: this.today,
       };
+
       axios({
         url: "http://localhost:3000/workouts",
         method: "POST",

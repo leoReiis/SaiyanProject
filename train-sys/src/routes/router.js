@@ -1,57 +1,61 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Login from "../components/Login.vue"
-import Signup from "../components/Signup.vue"
-import Dashboard from "../components/Dashboard.vue"
-import Exercises from "../components/Exercises.vue"
-import Students from "../components/Students.vue"
-import RegisterStudent from "../components/RegisterStudent.vue"
-import Training from "../components/Training.vue"
-import WorkoutView from "../components/WorkoutView.vue"
+import Login from "../components/Login.vue";
+import Signup from "../components/Signup.vue";
+import Dashboard from "../components/Dashboard.vue";
+import Exercises from "../components/Exercises.vue";
+import Students from "../components/Students.vue";
+import RegisterStudent from "../components/RegisterStudent.vue";
+import Training from "../components/Training.vue";
+import WorkoutView from "../components/WorkoutView.vue";
 
 export const routes = createRouter({
   history: createWebHashHistory(),
 
   routes: [
     {
+      path: "/",
+      redirect: "/login",
+    },
+    {
       path: "/login",
       component: Login,
       name: "login",
     },
     {
-      path : "/signup",
+      path: "/signup",
       component: Signup,
-      name : "signup"
+      name: "signup",
     },
     {
-      path : "/dashboard",
-      component: Dashboard, 
-      name: "dashboard"
+      path: "/dashboard",
+      component: Dashboard,
+      name: "dashboard",
     },
 
     {
       path: "/exercises",
       component: Exercises,
-      name: "Exercises"
+      name: "Exercises",
     },
     {
       path: "/students",
       component: Students,
-      name: "students"
+      name: "students",
     },
     {
       path: "/registerstudent",
       component: RegisterStudent,
-      name: "registerStudent"
+      name: "registerStudent",
     },
     {
       path: "/training",
       component: Training,
-      name: Training
+      name: Training,
     },
     {
       path: "/workoutview",
       component: WorkoutView,
-      name: WorkoutView
-    }
+      name: WorkoutView,
+    },
   ],
 });

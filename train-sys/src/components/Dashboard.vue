@@ -43,7 +43,13 @@
       </v-card>
     </v-container>
   </v-container>
-  <v-img :width="300" cover src="/son-goku.jpg" class="son-goku" alt ="kid-goku-dragonball"></v-img>
+  <v-img
+    :width="300"
+    cover
+    src="/son-goku.jpg"
+    class="son-goku"
+    alt="kid-goku-dragonball"
+  ></v-img>
 </template>
 
 <script>
@@ -97,5 +103,4 @@ export default {
   right: 0px;
   bottom: 100px;
 }
-
 </style>

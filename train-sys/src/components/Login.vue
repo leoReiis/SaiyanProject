@@ -25,7 +25,7 @@
         ref="password"
         @click:append="showPassword = !showPassword"
         :type="showPassword ? 'text' : 'password'"
-        :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
       ></v-text-field>
 
       <v-btn

@@ -22,7 +22,7 @@
     >
       <v-container class="d-flex">
         <v-text-field
-          v-model="fullName"
+          v-model="studentData.fullName"
           hint="Enter your full name"
           placeholder="Full name"
           :rules="[(v) => !!v || 'Invalid name']"
@@ -30,7 +30,7 @@
         </v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="email"
+          v-model="studentData.email"
           type="email"
           hint="Enter your email"
           placeholder="Email"
@@ -40,7 +40,7 @@
 
       <v-container class="d-flex">
         <v-text-field
-          v-model="contact"
+          v-model="studentData.contact"
           hint="Enter your contact"
           placeholder="Contact"
           :rules="[(v) => !!v || 'Invalid contact']"
@@ -49,7 +49,7 @@
 
         <div class="w-50 d-flex align-iten-center">
           <VueDatePicker
-            v-model="birthDate"
+            v-model="studentData.birthDate"
             hint="Enter your birth date"
             :max-date="new Date()"
             cancelText="Cancel"
@@ -63,16 +63,18 @@
 
       <v-container class="d-flex">
         <v-text-field
-          @blur="getZipCodeData(this.zipCode)"
-          v-model="zipCode"
+          @blur="getZipCodeData(this.studentData.zipCode)"
+          v-model="studentData.zipCode"
           hint="Enter your zip code"
           placeholder="Zip Code"
           :rules="[(v) => !!v || 'Invalid zipcode']"
+          :maxlength="8"
+          :counter="8"
         >
         </v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="streetName"
+          v-model="studentData.streetName"
           hint="Enter street name"
           placeholder="Street name"
           :rules="[(v) => !!v || 'Invalid street name']"
@@ -80,7 +82,7 @@
         <v-spacer></v-spacer>
         <v-text-field
           type="number"
-          v-model="houseNumber"
+          v-model="studentData.houseNumber"
           hint="Enter house number"
           placeholder="Number"
           :rules="[
@@ -92,28 +94,29 @@
 
       <v-container class="d-flex">
         <v-text-field
-          v-model="state"
+          v-model="studentData.state"
+          :maxlength="2"
           hint="Enter your state"
           placeholder="State"
           :rules="[(v) => !!v || 'Invalid state']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="district"
+          v-model="studentData.district"
           placeholder="District"
           hint="District"
           :rules="[(v) => !!v || 'Invalid district']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="city"
+          v-model="studentData.city"
           placeholder="City"
           hint="Enter your city"
           :rules="[(v) => !!v || 'Invalid city']"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="complement"
+          v-model="studentData.complement"
           placeholder="Complement"
           hint="Adress complement"
         ></v-text-field>
@@ -140,17 +143,20 @@ import moment from "moment";
 export default {
   data() {
     return {
-      fullName: "",
-      email: "",
-      contact: "",
-      birthDate: "",
-      zipCode: "",
-      streetName: "",
-      houseNumber: "",
-      state: "",
-      district: "",
-      city: "",
-      complement: "",
+      studentData: {
+        fullName: "",
+        email: "",
+        contact: "",
+        birthDate: "",
+        zipCode: "",
+        streetName: "",
+        houseNumber: "",
+        state: "",
+        district: "",
+        city: "",
+        complement: "",
+      },
+
       yupError: {},
     };
   },
@@ -169,20 +175,23 @@ export default {
 
     registerStudent() {
       const token = localStorage.getItem("token");
-      const auxBirthDate = moment(this.birthDate).format("MM/DD/YYYY");
+      const auxBirthDate = moment(this.studentData.birthDate).format(
+        "MM/DD/YYYY"
+      );
       const newStudent = {
-        name: this.fullName,
-        email: this.email,
-        contact: this.contact,
+        name: this.studentData.fullName,
+        email: this.studentData.email,
+        contact: this.studentData.contact,
         date_birth: auxBirthDate,
-        cep: this.zipCode,
-        street: this.streetName,
-        number: this.houseNumber,
-        neighborhood: this.district,
-        city: this.city,
-        province: this.state,
-        complement: this.complement,
+        cep: this.studentData.zipCode,
+        street: this.studentData.streetName,
+        number: this.studentData.houseNumber,
+        neighborhood: this.studentData.district,
+        city: this.studentData.city,
+        province: this.studentData.state.toUpperCase(),
+        complement: this.studentData.complement,
       };
+
       axios({
         url: "http://localhost:3000/students",
         method: "POST",
@@ -201,17 +210,16 @@ export default {
     },
 
     getZipCodeData(zipCode) {
-      if (this.zipCode.length == 8) {
+      if (this.studentData.zipCode.length == 8) {
         axios({
           url: `http://viacep.com.br/ws/${zipCode}/json/`,
         })
           .then((res) => {
-            this.zipCodeData = res.data;
-            this.streetName = res.data.logradouro;
-            this.city = res.data.localidade;
-            this.district = res.data.bairro;
-            this.state = res.data.uf;
-            this.complement = res.data.complemento;
+            this.studentData.streetName = res.data.logradouro;
+            this.studentData.city = res.data.localidade;
+            this.studentData.district = res.data.bairro;
+            this.studentData.state = res.data.uf;
+            this.studentData.complement = res.data.complemento;
           })
           .catch(() => {
             alert(

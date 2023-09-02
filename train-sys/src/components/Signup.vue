@@ -11,19 +11,19 @@
       class="d-flex flex-column justify-center mt-8"
     >
       <v-text-field
-        v-model="fullName"
+        v-model="signupData.fullName"
         label="Full Name"
         hint="Enter your full name"
       ></v-text-field>
 
       <v-text-field
-        v-model="email"
+        v-model="signupData.email"
         label="Email"
         hint="Enter your email"
       ></v-text-field>
 
       <v-text-field
-        v-model="password"
+        v-model="signupData.password"
         label="Password"
         type="password"
         hint="Enter your password"
@@ -31,7 +31,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="confirmPassword"
+        v-model="signupData.confirmPassword"
         label="Verify Password"
         hint="Confirm your password"
         type="password"
@@ -40,10 +40,10 @@
       ></v-text-field>
 
       <v-select
-        v-model="plan"
+        v-model="signupData.plan"
         variant="solo"
         label="Plano"
-        :items="this.planList"
+        :items="this.signupData.planList"
         item-title="title"
         item-value="value"
       ></v-select>
@@ -72,7 +72,13 @@
       </ul>
     </v-alert>
   </v-container>
-  <v-img :width="300" cover src="/songohan.png" class="son-gohan" alt ="kid-gohan-dragonball"></v-img>
+  <v-img
+    :width="300"
+    cover
+    src="/songohan.png"
+    class="son-gohan"
+    alt="kid-gohan-dragonball"
+  ></v-img>
 </template>
 
 <script>
@@ -83,16 +89,19 @@ import axios from "axios";
 export default {
   data() {
     return {
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      planList: [
-        { value: "bronze", title: "Bronze" },
-        { value: "silver", title: "Silver" },
-        { value: "gold", title: "Gold" },
-      ],
-      plan: "bronze",
+      signupData: {
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        planList: [
+          { value: "bronze", title: "Bronze" },
+          { value: "silver", title: "Silver" },
+          { value: "gold", title: "Gold" },
+        ],
+        plan: "bronze",
+      },
+
       errosYup: {},
     };
   },
@@ -104,13 +113,13 @@ export default {
         this.$refs.confirmPassword.focus();
         return;
       }
-      
+
       axios
         .post("http://localhost:3000/users", {
-          name: this.fullName,
-          email: this.email,
-          password: this.password,
-          type_plan: this.plan,
+          name: this.signupData.fullName,
+          email: this.signupData.email,
+          password: this.signupData.password,
+          type_plan: this.signupData.plan,
         })
         .then(() => {
           alert(
@@ -145,11 +154,11 @@ export default {
 
         schema.validateSync(
           {
-            fullName: this.fullName,
-            email: this.email,
-            password: this.password,
-            confirmPassword: this.confirmPassword,
-            plan: this.plan,
+            fullName: this.signupData.fullName,
+            email: this.signupData.email,
+            password: this.signupData.password,
+            confirmPassword: this.signupData.confirmPassword,
+            plan: this.signupData.plan,
           },
           { abortEarly: false }
         );
@@ -168,7 +177,7 @@ export default {
     },
 
     passwordMatches() {
-      return this.password === this.confirmPassword;
+      return this.signupData.password === this.signupData.confirmPassword;
     },
   },
 };
