@@ -12,6 +12,7 @@
     >
       <p>Email</p>
       <v-text-field
+        variant="outlined"
         v-model="email"
         hint="Enter your email"
         placeholder="Email"
@@ -19,6 +20,7 @@
 
       <p>Password</p>
       <v-text-field
+        variant="outlined"
         v-model="password"
         hint="Enter your password"
         placeholder="Password"

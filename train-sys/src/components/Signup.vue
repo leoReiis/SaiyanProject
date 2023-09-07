@@ -11,29 +11,29 @@
       class="d-flex flex-column justify-center mt-8"
     >
       <v-text-field
+        variant="outlined"
         v-model="signupData.fullName"
         label="Full Name"
-        hint="Enter your full name"
       ></v-text-field>
 
       <v-text-field
+        variant="outlined"
         v-model="signupData.email"
         label="Email"
-        hint="Enter your email"
       ></v-text-field>
 
       <v-text-field
+        variant="outlined"
         v-model="signupData.password"
         label="Password"
         type="password"
-        hint="Enter your password"
         counter
       ></v-text-field>
 
       <v-text-field
+        variant="outlined"
         v-model="signupData.confirmPassword"
         label="Verify Password"
-        hint="Confirm your password"
         type="password"
         ref="confirmPassword"
         counter
@@ -41,7 +41,7 @@
 
       <v-select
         v-model="signupData.plan"
-        variant="solo"
+        variant="outlined"
         label="Plano"
         :items="this.signupData.planList"
         item-title="title"

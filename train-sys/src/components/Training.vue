@@ -20,7 +20,7 @@
       <v-container>
         <v-select
           v-model="workoutData.exerciseDescription"
-          variant="solo"
+          variant="outlined"
           label="Exercise"
           :items="getExerciseDescription()"
           :rules="[(v) => !!v || 'Exercise is a required field']"
@@ -29,6 +29,7 @@
 
       <v-container class="d-flex">
         <v-text-field
+          variant="outlined"
           v-model="workoutData.reps"
           type="number"
           label="Reps"
@@ -43,6 +44,7 @@
 
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="workoutData.weight"
           type="number"
           label="Kg"
@@ -54,6 +56,7 @@
         <v-spacer></v-spacer>
         <!-- type = time.. find component that shows only seconds for the rest time -->
         <v-text-field
+          variant="outlined"
           v-model="workoutData.breaktime"
           hint="Rest time in seconds"
           placeholder="Rest"
@@ -64,7 +67,7 @@
       <v-container>
         <v-select
           v-model="today"
-          variant="solo"
+          variant="outlined"
           label="Day"
           :items="this.weekDayList"
           item-title="title"
@@ -73,6 +76,7 @@
       </v-container>
       <v-container>
         <v-textarea
+          variant="outlined"
           v-model="workoutData.observations"
           outlined
           placeholder="Notes"

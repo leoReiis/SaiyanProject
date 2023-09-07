@@ -13,14 +13,16 @@
       <v-icon>mdi-cloud-outline</v-icon>
     </span>
     <v-divider></v-divider>
-    <v-toolbar>
+    <span class="d-flex align-start ">
       <v-text-field
+        variant="outlined"
         v-model="description"
         ref="description"
         placeholder="New Exercise"
       ></v-text-field>
 
       <v-btn
+        height = "55px"
         color="#143FD5"
         @click="registerExercise()"
         class="ml-4"
@@ -30,7 +32,7 @@
       >
         Create
       </v-btn>
-    </v-toolbar>
+    </span>
   </v-container>
   <v-container
     class="w-75 h-auto d-flex flex-column justify-center rounded border mt-8"

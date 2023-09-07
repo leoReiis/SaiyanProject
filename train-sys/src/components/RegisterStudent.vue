@@ -22,6 +22,7 @@
     >
       <v-container class="d-flex">
         <v-text-field
+          variant="outlined"
           v-model="studentData.fullName"
           hint="Enter your full name"
           placeholder="Full name"
@@ -30,6 +31,7 @@
         </v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="studentData.email"
           type="email"
           hint="Enter your email"
@@ -40,6 +42,7 @@
 
       <v-container class="d-flex">
         <v-text-field
+          variant="outlined"
           v-model="studentData.contact"
           hint="Enter your contact"
           placeholder="Contact"
@@ -47,8 +50,9 @@
         ></v-text-field>
         <v-spacer></v-spacer>
 
-        <div class="w-50 d-flex align-iten-center">
+        <div>
           <VueDatePicker
+            placeholder="Birth date"
             v-model="studentData.birthDate"
             hint="Enter your birth date"
             :max-date="new Date()"
@@ -63,6 +67,7 @@
 
       <v-container class="d-flex">
         <v-text-field
+          variant="outlined"
           @blur="getZipCodeData(this.studentData.zipCode)"
           v-model="studentData.zipCode"
           hint="Enter your zip code"
@@ -74,6 +79,7 @@
         </v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="studentData.streetName"
           hint="Enter street name"
           placeholder="Street name"
@@ -81,6 +87,7 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           type="number"
           v-model="studentData.houseNumber"
           hint="Enter house number"
@@ -94,6 +101,7 @@
 
       <v-container class="d-flex">
         <v-text-field
+          variant="outlined"
           v-model="studentData.state"
           :maxlength="2"
           hint="Enter your state"
@@ -102,6 +110,7 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="studentData.district"
           placeholder="District"
           hint="District"
@@ -109,6 +118,7 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="studentData.city"
           placeholder="City"
           hint="Enter your city"
@@ -116,6 +126,7 @@
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-text-field
+          variant="outlined"
           v-model="studentData.complement"
           placeholder="Complement"
           hint="Adress complement"
@@ -235,5 +246,9 @@ export default {
 <style>
 .icon-color {
   color: #143fd5;
+}
+
+.dp__input {
+  height: 58px;
 }
 </style>

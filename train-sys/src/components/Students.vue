@@ -26,6 +26,7 @@
     <v-divider></v-divider>
     <v-container class="d-flex justify-space-between">
       <v-text-field
+        variant = "outlined"
         v-model="searchStudentName"
         hint="Enter the student name"
         placeholder="Student Name"
