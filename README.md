@@ -55,3 +55,6 @@ Fique à vontade para contribuir com melhorias ou novos recursos para o projeto.
 
 ---
 Sinta-se à vontade para adicionar mais informações à documentação, conforme necessário, e personalizá-la de acordo com as necessidades do seu projeto. Lembre-se de manter a documentação atualizada à medida que o projeto evolui.
+<p align="center">
+    <img align = "center" alt = "" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-CYka7eH5lHUeTjE2Lynch6wIS-OOUnR67g&usqp=CAU" />
+</p>
