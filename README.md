@@ -43,14 +43,6 @@ Para executar o **Saiya Gym** em seu ambiente local, siga as etapas abaixo:
 
 5. **Acesse o aplicativo**: Abra seu navegador e acesse `http://localhost:5173/login` para interagir com o **Saiya Gym**.
 
-## Sugestões de Melhoria
-
-Algumas sugestões para melhorar o projeto incluem:
-
-- Desenvolver novos métodos na API para adicionar funcionalidades adicionais, como a criação de rotinas personalizadas.
-- Estruturar o banco de dados de forma a vincular cada aluno ao professor ou usuário logado.
-- Adicionar dados fictícios ou de exemplo para facilitar a compreensão e teste do sistema.
-
 Fique à vontade para contribuir com melhorias ou novos recursos para o projeto. Sua colaboração é bem-vinda!
 
 ---
