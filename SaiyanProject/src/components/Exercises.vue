@@ -1,7 +1,5 @@
 <template>
-  <v-container
-    class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border"
-  >
+  <v-container class="w-75 h-auto d-flex flex-column justify-center rounded mt-16 border">
     <v-btn icon>
       <router-link to="/dashboard" class="icon-color">
         <v-icon>mdi-arrow-left-bold</v-icon>
@@ -14,29 +12,15 @@
     </span>
     <v-divider></v-divider>
     <span class="d-flex align-start ">
-      <v-text-field
-        variant="outlined"
-        v-model="description"
-        ref="description"
-        placeholder="New Exercise"
-      ></v-text-field>
+      <v-text-field variant="outlined" v-model="description" ref="description" placeholder="New Exercise"></v-text-field>
 
-      <v-btn
-        height = "55px"
-        color="#143FD5"
-        @click="registerExercise()"
-        class="ml-4"
-        size="small"
-        type="button"
-        variant="elevated"
-      >
+      <v-btn height="55px" color="#143FD5" @click="registerExercise()" class="ml-4" size="small" type="button"
+        variant="elevated">
         Create
       </v-btn>
     </span>
   </v-container>
-  <v-container
-    class="w-75 h-auto d-flex flex-column justify-center rounded border mt-8"
-  >
+  <v-container class="w-75 h-auto d-flex flex-column justify-center rounded border mt-8">
     <v-table fixed-header height="250px">
       <thead>
         <tr>
@@ -49,8 +33,7 @@
           <td>{{ item.description }}</td>
           <td>
             <v-btn @click="deleteExercise(item.id)" flat icon size="small">
-              <v-icon>mdi-delete</v-icon></v-btn
-            >
+              <v-icon>mdi-delete</v-icon></v-btn>
           </td>
         </tr>
       </tbody>
@@ -117,19 +100,21 @@ export default {
         });
     },
 
-    deleteExercise(id) {
-      //  waiting for api support
+    async deleteExercise(id) {
       const userConfirmed = window.confirm(
         "Are you sure you want to delete this exercise?"
       );
 
-      if (userConfirmed) {
-        axios
-          .delete(`http://localhost:3000/exercises/${id}`, {})
-          .then(() => {
-            alert("Sucess!");
-          })
-          .catch(() => alert("This app doesn't support delete methods yet!"));
+      if (!userConfirmed) {
+        return
+      }
+
+      try {
+        await axios.delete(`http://localhost:3000/exercises/${id}`, {})
+        alert("Exercício excluído com sucesso!");
+        this.getExerciseList();
+      } catch (error) {
+        alert("Erro ao excluir exercício!")
       }
     },
   },
